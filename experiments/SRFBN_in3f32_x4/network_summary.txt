@@ -1,0 +1,78 @@
+SRFBN(
+  (sub_mean): MeanShift(3, 3, kernel_size=(1, 1), stride=(1, 1))
+  (conv_in): Sequential(
+    (0): Conv2d(3, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): PReLU(num_parameters=1)
+  )
+  (feat_in): Sequential(
+    (0): Conv2d(128, 32, kernel_size=(1, 1), stride=(1, 1))
+    (1): PReLU(num_parameters=1)
+  )
+  (block): FeedbackBlock(
+    (compress_in): Sequential(
+      (0): Conv2d(64, 32, kernel_size=(1, 1), stride=(1, 1))
+      (1): PReLU(num_parameters=1)
+    )
+    (upBlocks): ModuleList(
+      (0): Sequential(
+        (0): ConvTranspose2d(32, 32, kernel_size=(8, 8), stride=(4, 4), padding=(2, 2))
+        (1): PReLU(num_parameters=1)
+      )
+      (1): Sequential(
+        (0): ConvTranspose2d(32, 32, kernel_size=(8, 8), stride=(4, 4), padding=(2, 2))
+        (1): PReLU(num_parameters=1)
+      )
+      (2): Sequential(
+        (0): ConvTranspose2d(32, 32, kernel_size=(8, 8), stride=(4, 4), padding=(2, 2))
+        (1): PReLU(num_parameters=1)
+      )
+    )
+    (downBlocks): ModuleList(
+      (0): Sequential(
+        (0): Conv2d(32, 32, kernel_size=(8, 8), stride=(4, 4), padding=(2, 2))
+        (1): PReLU(num_parameters=1)
+      )
+      (1): Sequential(
+        (0): Conv2d(32, 32, kernel_size=(8, 8), stride=(4, 4), padding=(2, 2))
+        (1): PReLU(num_parameters=1)
+      )
+      (2): Sequential(
+        (0): Conv2d(32, 32, kernel_size=(8, 8), stride=(4, 4), padding=(2, 2))
+        (1): PReLU(num_parameters=1)
+      )
+    )
+    (uptranBlocks): ModuleList(
+      (0): Sequential(
+        (0): Conv2d(64, 32, kernel_size=(1, 1), stride=(1, 1))
+        (1): PReLU(num_parameters=1)
+      )
+      (1): Sequential(
+        (0): Conv2d(96, 32, kernel_size=(1, 1), stride=(1, 1))
+        (1): PReLU(num_parameters=1)
+      )
+    )
+    (downtranBlocks): ModuleList(
+      (0): Sequential(
+        (0): Conv2d(64, 32, kernel_size=(1, 1), stride=(1, 1))
+        (1): PReLU(num_parameters=1)
+      )
+      (1): Sequential(
+        (0): Conv2d(96, 32, kernel_size=(1, 1), stride=(1, 1))
+        (1): PReLU(num_parameters=1)
+      )
+    )
+    (compress_out): Sequential(
+      (0): Conv2d(96, 32, kernel_size=(1, 1), stride=(1, 1))
+      (1): PReLU(num_parameters=1)
+    )
+  )
+  (out): Sequential(
+    (0): ConvTranspose2d(32, 32, kernel_size=(8, 8), stride=(4, 4), padding=(2, 2))
+    (1): PReLU(num_parameters=1)
+  )
+  (conv_out): Sequential(
+    (0): Conv2d(32, 3, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+  )
+  (add_mean): MeanShift(3, 3, kernel_size=(1, 1), stride=(1, 1))
+)
+Network structure: [DataParallel - SRFBN], with parameters: [483,146]
